@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        String userName, password;
+        Scanner input = new Scanner(System.in);
+
+        int right = 3;  // kalan şifre hakkı
+        int balance = 1500;
+        int select;
+        while (right > 0) {
+            System.out.print("Kullanıcı Adınız :");
+            userName = input.nextLine();
+            System.out.print("Parolanız : ");
+            password = input.nextLine();
+
+            if (userName.equals("kokenomur") && password.equals("kok123")) {
+                System.out.println("Merhaba, KOKEN Bankasına Hoşgeldiniz!");
+                do {
+                    System.out.println("1-Para Çekme\n" +
+                            "2-Para Yatırma\n" +
+                            "3-Bakiye Sorgula\n" +
+                            "4-Çıkış Yap");
+                    System.out.print("Lütfen yapmak istediğiniz işlemi seçiniz : ");
+                    select = input.nextInt();
+
+                    switch(select) {
+                        case 1:
+                            System.out.println("Bakiyeniz = " + balance);
+                            System.out.print("Çekmek istediğiniz tutarı giriniz: ");
+                            int tutar = input.nextInt();
+                            if(tutar > balance) {
+                                System.out.print("Yetersiz bakiye. Tekrar giriniz: ");
+                                tutar = input.nextInt();
+                            }
+                            balance -= tutar;
+                            System.out.println("Kalan bakiyeniz = " + balance);
+                            break;
+                        case 2:
+                            System.out.println("Bakiyeniz = " + balance);
+                            System.out.print("Yatırmak istediğiniz tutarı giriniz: ");
+                            tutar = input.nextInt();
+                            balance += tutar;
+                            System.out.println("Yeni bakiyeniz = " + balance);
+                            break;
+                        case 3:
+                            System.out.println("Bakiyeniz = " + balance);
+                            break;
+                        case 4:
+                            System.out.println("Kartınızı almayı unutmayınız.!!");
+                        default:
+                            System.out.println("Yanlıs islem secitiniz. Tekrar giriniz.");
+                    }
+                } while (select != 4);
+                System.out.println("Tekrar görüşmek üzere.");
+                break;
+            } else {
+                right--;
+                System.out.println("Hatalı kullanıcı adı veya şifre. Tekrar deneyiniz.");
+                if (right == 0) {
+                    System.out.println("Hesabınız bloke olmuştur lütfen banka ile iletişime geçiniz.");
+                } else {
+                    System.out.println("Kalan Hakkınız : " + right);
+                }
+            }
+        }
+    }
+}
